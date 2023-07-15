@@ -1,0 +1,15 @@
+92BF3E
+rgb(23,100,145)
+rgb(51,67,190) 
+3343BE  blue
+rgb(98,0,238)
+rgb(98,0,238)
+6200EE  blue
+rgb(143,17,229)
+rgb(143,17,229)
+8F11E5
+
+react native dashboard
+table
+chart
+graph
