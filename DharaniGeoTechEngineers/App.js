@@ -8,8 +8,7 @@ import Services from './Screens/Services';
 import Projects from './Screens/Projects';
 import Gallery from './Screens/Gallery';
 import Contact from './Screens/Contact';
-
-
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const Drawer = createDrawerNavigator();
 const windowWidth = Dimensions.get('window').width;
@@ -28,7 +27,7 @@ function CustomDrawerContent({ navigation }) {
     outputRange: [1, 0],
   });
 
-  const renderDrawerItem = (item) => {
+  const renderDrawerItem = (item, iconName) => {
     const isActive = activeItem === item;
 
     return (
@@ -38,6 +37,11 @@ function CustomDrawerContent({ navigation }) {
         onPress={() => handlePress(item)}
         activeOpacity={0.1}
       >
+        <AntDesign
+          name={iconName}
+          size={24}
+          style={[styles.drawerItemIcon, isActive && styles.drawerItemIconActive]}
+        />
         <Text style={[styles.drawerItemLabel, isActive && styles.drawerItemLabelActive]}>{item}</Text>
       </TouchableOpacity>
     );
@@ -48,7 +52,14 @@ function CustomDrawerContent({ navigation }) {
       <View style={styles.drawerHeader}>
         <Image source={require('./assets/images/logo.png')} style={styles.logoImage} />
       </View>
-      {['Home', 'About', 'Services', 'Projects', 'Gallery', 'Contact'].map((item) => renderDrawerItem(item))}
+      {[
+        { name: 'Home', iconName: 'home' },
+        { name: 'About', iconName: 'user' },
+        { name: 'Services', iconName: 'windows' },
+        { name: 'Projects', iconName: 'camera' },
+        { name: 'Gallery', iconName: 'wechat' },
+        { name: 'Contact', iconName: 'mail' },
+      ].map((item) => renderDrawerItem(item.name, item.iconName))}
     </Animated.View>
   );
 }
@@ -80,15 +91,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   drawerItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 15,
     paddingVertical: 12,
   },
-  drawerItemLabel: {
-    fontSize: 22,
-    marginLeft: 25,
-    marginVertical: 10,
+  drawerItemIcon: {
+    marginRight: 10,
     color: '#333',
-    fontFamily: 'Roboto-Italic',
+  },
+  drawerItemIconActive: {
+    color: '#8F11E7',
+  },
+  drawerItemLabel: {
+    marginLeft: 5,
+    fontSize: 16,
+    color: '#333',
+    fontFamily: 'RobotoRegular',
   },
   drawerItemLabelActive: {
     color: '#8F11E7',
@@ -102,7 +121,5 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
 });
-
-
 
 export default App;
