@@ -10,7 +10,7 @@ const RegisterScreen = () => {
   const handleRegistration = () => {
     // Perform registration logic here
   
-    navigation.navigate('LoginScreen');
+    navigation.navigate('main');
     console.log('Registration:', email, password);
   };
 

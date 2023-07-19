@@ -1,19 +1,44 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { useNavigation,useRoute } from '@react-navigation/native';
 
 const Logout = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const { username, password } = route.params || {};
+  const [newPassword, setNewPassword] = useState('');
 
   const handleLogout = () => {
     // Perform logout logic here
 
     // Navigate to the login screen
-    navigation.navigate('LoginScreen');
+    navigation.navigate('Login');
   };
 
   return (
-    <View>
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        value={username}
+       
+        autoCapitalize="none"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+       
+        secureTextEntry
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="New Password"
+        value={newPassword}
+        onChangeText={setNewPassword}
+        secureTextEntry
+      />
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
@@ -22,10 +47,25 @@ const Logout = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 26,
+    backgroundColor: '#fff',
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingHorizontal: 15,
+    borderRadius:15,
+  },
   logoutButton: {
-    backgroundColor: '#8F11E5',
-    padding: 10,
-    borderRadius: 5,
+    backgroundColor: '#0E5583',
+    paddingVertical: 12,
+    borderRadius: 15,
+    marginTop: 16,
   },
   logoutText: {
     color: '#fff',

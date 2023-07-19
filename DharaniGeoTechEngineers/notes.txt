@@ -13,3 +13,53 @@ react native dashboard
 table
 chart
 graph
+
+
+JWT Authenication
+
+
+circular slider
+
+https://www.npmjs.com/package/react-native-circular-progress-indicator
+
+https://www.npmjs.com/package/react-native-progress
+
+'#0E5583 blue
+#95BF40 green
+logo colors
+
+Teal and Coral:
+
+Teal: #008080***
+Coral: #FF7F50
+Purple and Gold:
+
+Purple: #800080
+Gold: #FFD700
+Midnight Blue and Silver:
+
+Midnight Blue: #191970****
+Silver: #C0C0C0
+Orchid and Turquoise:
+
+Orchid: #DA70D6
+Turquoise: #40E0D0
+Maroon and Champagne:
+
+Maroon: #800000
+Champagne: #F7E7CE
+Navy Blue and Peach:
+
+Navy Blue: #000080
+Peach: #FFDAB9
+Olive and Coral:
+
+Olive: #808000
+Coral: #FF7F50
+Indigo and Lime Green:
+
+Indigo: #4B0082
+Lime Green: #00FF00
+
+rgb(44,80,152)
+2C5098
