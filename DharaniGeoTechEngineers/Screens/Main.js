@@ -76,24 +76,7 @@ function CustomDrawerContent({ navigation }) {
     <DrawerContentScrollView
     style={styles.drawerContainer} // Apply the custom style with rounded corners
   >
-      <View style={styles.drawerHeader}>
-      
-        <Image source={require('../assets/images/logobg.png')} style={styles.logoImage} />
-        <TouchableOpacity onPress={() => handleEditPress()} activeOpacity={0.1} >
-            <AntDesign name="edit" size={15}
-             style={[styles.editIcon, styles.shadow]}
-             />
-          </TouchableOpacity>
-        {/* <Text style={styles.companyName}>Dharani GeoTech Engineers</Text> */}
-        <View style={styles.headerIconContainer}>
-          <TouchableOpacity onPress={() => handleLogoutPress()} activeOpacity={0.1}>
-            <AntDesign name="logout" size={14} 
-            style={[styles.logoutIcon, styles.shadow]}
-            />
-          </TouchableOpacity>
-          
-        </View>
-      </View>
+     <DrawerHeader/>
       <Divider/>
       {[
        
