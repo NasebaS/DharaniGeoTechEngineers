@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Animated, ImageBackground, Di
 import ActiveIndicator from '../Components/ActiveIndicator';
 import Divider from '../Components/Divider'
 import DrawerHeader from '../Components/DrawerHeader';
-
+import DrawerData from '../assets/DrawerData';
 import Logout from './Logout';
 import Profile from './Profile';
 import Dashboard from './Dashboard';
@@ -76,22 +76,9 @@ function CustomDrawerContent({ navigation }) {
     <DrawerContentScrollView
     style={styles.drawerContainer} // Apply the custom style with rounded corners
   >
-     <DrawerHeader/>
+      <DrawerHeader navigation={navigation} />
       <Divider/>
-      {[
-       
-        { name: 'Dashboard', iconName: 'dashboard' },
-        { name: 'Attendance entry', iconName: 'layout' },
-        { name: 'Edit Attendance', iconName: 'carryout' },
-        { name: 'Material request', iconName: 'indent-right' },
-        { name: 'Material Inward', iconName: 'indent-left' },
-        { name: 'Expense entry', iconName: 'codesquareo' },
-        { name: 'DPR Entry', iconName: 'export2' },
-        { name: 'DPR Report', iconName: 'export' },
-        { name: 'Expense report', iconName: 'dropbox' },
-        { name: 'Pity cash entry', iconName: 'codepen' },     
-         
-       ].map((item) => renderDrawerItem(item.name, item.iconName))}
+      {DrawerData.map((item) => renderDrawerItem(item.name, item.iconName))}
         {/* <View style={styles.drawerBottomRadius} /> */}
         </DrawerContentScrollView>
   );

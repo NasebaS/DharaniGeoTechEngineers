@@ -2,16 +2,17 @@ import { View, StyleSheet, TouchableOpacity, Dimensions,Image } from 'react-nati
 import React from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const DrawerHeader = () => {
+const DrawerHeader = ({ navigation }) => {
     const handleEditPress = () => {
     
         navigation.navigate('Profile');
       };
-      const handleLogoutPress=(item)=>{
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'Login' }],
-        });
+      const handleLogoutPress=()=>{
+        // navigation.reset({
+        //   index: 0,
+        //   routes: [{ name: 'Login' }],
+        // });
+        navigation.navigate('Login');
       };
   return (
     <View style={styles.drawerHeader}>
