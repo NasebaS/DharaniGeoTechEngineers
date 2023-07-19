@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     top: '2%', // Place the form container at the center of the screen
     left: 0,
     right: 0,
-    bottom:5,
+    bottom:1,
     
     backgroundColor: 'transparent', // Set the background color to transparent
     paddingHorizontal: 1,

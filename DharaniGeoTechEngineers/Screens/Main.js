@@ -78,8 +78,8 @@ function CustomDrawerContent({ navigation }) {
       <View style={styles.drawerHeader}>
       
         <Image source={require('../assets/images/logobg.png')} style={styles.logoImage} />
-        <TouchableOpacity onPress={() => handleEditPress()} activeOpacity={0.1}>
-            <AntDesign name="edit" size={14}
+        <TouchableOpacity onPress={() => handleEditPress()} activeOpacity={0.1} >
+            <AntDesign name="edit" size={15}
              style={[styles.editIcon, styles.shadow]}
              />
           </TouchableOpacity>
@@ -270,7 +270,9 @@ borderRadius:5,
     color:'#000',
     borderRadius:10,
     top:80,
-    left:20
+    left:30,
+    height:20,
+    width:20
 
   },
   shadow: {
@@ -279,9 +281,9 @@ borderRadius:5,
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.15,
     shadowRadius: 3.84,
-    elevation: 15,
+    elevation: 10,
   },
   drawerStyle: {
     top:5  // Set the background color of the drawer to transparent

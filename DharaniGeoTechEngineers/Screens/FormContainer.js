@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
 
 const FormContainer = ({ username, role }) => {
   const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  
 
   const handleChangePassword = () => {
     // Handle the password change logic here, for example, you can make an API call to update the password.
@@ -16,7 +17,7 @@ const FormContainer = ({ username, role }) => {
     <View style={styles.container}>
       {/* User Icon */}
       <View style={styles.userIconContainer}>
-        <AntDesign name="user" size={80} color="#333" />
+        <Image source={require('../assets/images/user4.png')} style={styles.userIcon} />
       </View>
 
       <View style={styles.userInfoContainer}>
@@ -32,6 +33,13 @@ const FormContainer = ({ username, role }) => {
           placeholder="New Password"
           value={newPassword}
           onChangeText={setNewPassword}
+          secureTextEntry
+        />
+         <TextInput
+          style={styles.input}
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
           secureTextEntry
         />
         <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
@@ -50,15 +58,22 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 40,
+    height:600
   },
   userIconContainer: {
     position: 'absolute',
     top: -40,
     backgroundColor: '#fff',
     width: 80,
+    height: 80,
     borderRadius: 40,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  userIcon: {
+    width: 120,
+    height: 120,
+    resizeMode: 'cover',
   },
   userInfoContainer: {
     alignItems: 'center',
@@ -68,10 +83,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 10,
+    color: '#666',
   },
   role: {
-    fontSize: 18,
-    color: '#666',
+    fontSize: 18,  
+    color:'tomato'
   },
   inputContainer: {
     width: '100%',
