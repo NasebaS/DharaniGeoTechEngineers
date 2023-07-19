@@ -4,6 +4,7 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@rea
 import { View, Text, StyleSheet, TouchableOpacity, Animated, ImageBackground, Dimensions, Image } from 'react-native';
 import ActiveIndicator from '../Components/ActiveIndicator';
 import Divider from '../Components/Divider'
+import DrawerHeader from '../Components/DrawerHeader';
 
 import Logout from './Logout';
 import Profile from './Profile';
