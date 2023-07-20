@@ -1,19 +1,18 @@
-import { View, Text, StyleSheet, TouchableOpacity, Animated, ImageBackground, Dimensions, Image } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import React,{useState} from 'react'
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-
+import {  DrawerContentScrollView } from '@react-navigation/drawer';
 import ActiveIndicator from '../Components/ActiveIndicator';
 import Divider from '../Components/Divider'
 import DrawerHeader from '../Components/DrawerHeader';
 import DrawerData from '../assets/DrawerData';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Colors from '../assets/Colors/Colors';
 
 
-const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent({ navigation }) {
     const [activeItem, setActiveItem] = useState('');
-    const animatedValue = React.useRef(new Animated.Value(0)).current;
+    
   
     const handlePress = (item) => {
       setActiveItem(item);
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
       color: '#666',
     },
     drawerItemIconActive: {
-      color: '#0E5583',
+      color: Colors.primary,
    
     },
     drawerItemLabel: {
@@ -126,7 +125,7 @@ const styles = StyleSheet.create({
     },
     
     drawerItemLabelActive: {
-      color: '#0E5583',
+      color: Colors.primary,
       borderRadius: 5,
       
       paddingVertical:8,
@@ -167,7 +166,7 @@ const styles = StyleSheet.create({
       marginLeft: 15,
     },
     logoutIcon:{
-  backgroundColor:'#0E5583',
+  backgroundColor:Colors.primary,
   paddingHorizontal:7,
   paddingVertical:7,
   color:'#fff',

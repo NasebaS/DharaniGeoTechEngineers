@@ -1,6 +1,7 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, Text, StyleSheet, Dimensions} from 'react-native';
+import Colors from '../assets/Colors/Colors';
 import Logout from '../Screens/Logout';
 import Profile from '../Screens/Profile';
 import Dashboard from '../Screens/Dashboard';
@@ -13,8 +14,6 @@ import ExpenseEntry from '../Screens/ExpenseEntry';
 import DPREntry from '../Screens/DPREntry';
 import DPRReport from '../Screens/DPRReport';
 import PityCashentry from '../Screens/PityCashentry';
-
-
 import CustomDrawerContent from '../Components/CustomDrawerContent';
 
 const Drawer = createDrawerNavigator();
@@ -27,7 +26,7 @@ function Main() {
       <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />} initialRouteName="Dashboard"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#0E5583',
+          backgroundColor: Colors.primary,
         },
         headerTintColor: '#fff', // Optional, to set the color of the header text/icons
       }}
@@ -106,7 +105,7 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   drawerItemIconActive: {
-    color: '#0E5583',
+    color: Colors.primary,
  
   },
   drawerItemLabel: {
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
   },
   
   drawerItemLabelActive: {
-    color: '#0E5583',
+    color: Colors.primary,
     borderRadius: 5,
     
     paddingVertical:8,
@@ -160,7 +159,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   logoutIcon:{
-backgroundColor:'#0E5583',
+backgroundColor:Colors.primary,
 paddingHorizontal:7,
 paddingVertical:7,
 color:'#fff',

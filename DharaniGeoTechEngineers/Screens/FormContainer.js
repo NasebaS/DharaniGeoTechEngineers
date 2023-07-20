@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image,Alert } from 'react-native';
+import Colors from '../assets/Colors/Colors';
 
 const FormContainer = ({ username, role }) => {
   const [newPassword, setNewPassword] = useState('');
@@ -10,6 +11,7 @@ const FormContainer = ({ username, role }) => {
     // Handle the password change logic here, for example, you can make an API call to update the password.
     console.log('New password:', newPassword);
     // Reset the input field after the password is changed
+    Alert.alert('Password Updated')
     setNewPassword('');
   };
 
@@ -52,13 +54,14 @@ const FormContainer = ({ username, role }) => {
 
 const styles = StyleSheet.create({
   container: {
+     flex: 1,
     alignItems: 'center',
     marginTop: 100,
     backgroundColor: '#F0F0F0', // Light gray background color
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 40,
-    height:600
+   
   },
   userIconContainer: {
     position: 'absolute',
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#0E5583',
+    backgroundColor: Colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,

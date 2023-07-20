@@ -1,6 +1,7 @@
 import { View, StyleSheet, TouchableOpacity, Dimensions,Image } from 'react-native';
 import React from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Colors from '../assets/Colors/Colors';
 
 const DrawerHeader = ({ navigation }) => {
     const handleEditPress = () => {
@@ -8,10 +9,7 @@ const DrawerHeader = ({ navigation }) => {
         navigation.navigate('Profile');
       };
       const handleLogoutPress=()=>{
-        // navigation.reset({
-        //   index: 0,
-        //   routes: [{ name: 'Login' }],
-        // });
+      
         navigation.navigate('Login');
       };
   return (
@@ -81,7 +79,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
        
       }, logoutIcon:{
-        backgroundColor:'#0E5583',
+        backgroundColor:Colors.primary,
         paddingHorizontal:7,
         paddingVertical:7,
         color:'#fff',

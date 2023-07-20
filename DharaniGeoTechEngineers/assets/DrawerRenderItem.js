@@ -3,6 +3,7 @@ import React from 'react';
 import { TouchableOpacity, Text,StyleSheet } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import ActiveIndicator from '../Components/ActiveIndicator';
+import Colors from './Colors/Colors';
 
 const DrawerRenderItem = (item, iconName, activeItem, handlePress) => {
   const isActive = activeItem === item;
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   drawerItemIconActive: {
-    color: '#0E5583',
+    color: Colors.primary,
  
   },
   drawerItemLabel: {
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
   },
   
   drawerItemLabelActive: {
-    color: '#0E5583',
+    color: Colors.primary,
     borderRadius: 5,
     
     paddingVertical:8,

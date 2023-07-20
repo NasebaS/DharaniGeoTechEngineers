@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Colors from '../assets/Colors/Colors';
 
 const Button = ({ iconName, onPress }) => {
   return (
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
 // paddingVertical:7,
   },
   icon: {
-    color:'#0E5583'
+    color:Colors.primary
   },
 });
 

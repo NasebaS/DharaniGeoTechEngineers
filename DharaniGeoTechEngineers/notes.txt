@@ -63,3 +63,43 @@ Lime Green: #00FF00
 
 rgb(44,80,152)
 2C5098
+
+
+EEEDED
+FAF3F0
+F4F2DE
+EDE4FF
+
+
+  cardValue: {
+    fontSize: 24,
+
+    cardTitle: {
+    fontSize: 16,
+
+     card: {
+    backgroundColor: '#fff',
+    padding: 20,
+    marginVertical: 10,
+    borderRadius: 8,
+    elevation: 5,
+    minWidth: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  daily expense
+  labels: mon tues wed thrus fri satu sun
+          amount
+
+          bar chart
+
+monthly expense
+labels; months'
+amount
+
+
+line chart
+
+total expense vs cash in hand
+

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import Colors from '../assets/Colors/Colors';
 
 const Divider = () => {
     return <View style={styles.divider} />;
@@ -9,7 +10,7 @@ const Divider = () => {
   
     divider: {
       height: 1,
-      backgroundColor: '#0E5583',
+      backgroundColor: Colors.primary,
       marginHorizontal: 30,
       paddingVertical: 1.1, 
     },

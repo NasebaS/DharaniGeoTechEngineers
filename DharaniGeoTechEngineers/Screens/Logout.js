@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { useNavigation,useRoute } from '@react-navigation/native';
+import Colors from '../assets/Colors/Colors';
 
 const Logout = () => {
   const navigation = useNavigation();
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     borderRadius:15,
   },
   logoutButton: {
-    backgroundColor: '#0E5583',
+    backgroundColor: Colors.primary,
     paddingVertical: 12,
     borderRadius: 15,
     marginTop: 16,
