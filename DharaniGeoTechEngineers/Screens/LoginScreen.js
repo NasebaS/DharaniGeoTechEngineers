@@ -9,7 +9,7 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = () => {
     // Perform login logic here
     console.log('Login:', username, password);
-    navigation.navigate('Main');
+    navigation.navigate('DrawerNavigator');
   };
 
   return (

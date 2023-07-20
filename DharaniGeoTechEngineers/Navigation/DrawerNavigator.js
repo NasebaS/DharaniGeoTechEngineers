@@ -1,92 +1,27 @@
-import React, { useState } from 'react';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-
-import { View, Text, StyleSheet, TouchableOpacity, Animated, ImageBackground, Dimensions, Image } from 'react-native';
-import ActiveIndicator from '../Components/ActiveIndicator';
-import Divider from '../Components/Divider'
-import DrawerHeader from '../Components/DrawerHeader';
-import DrawerData from '../assets/DrawerData';
-import Logout from './Logout';
-import Profile from './Profile';
-import Dashboard from './Dashboard';
-import AttendanceEntry from './AttendanceEntry';
-import EditAttendance from './EditAttendance';
-import MaterialInward from './MaterialInward';
-import MaterialRequest from './MaterialRequest';
-import ExpenseReport from './ExpenseReport';
-import ExpenseEntry from './ExpenseEntry';
-import DPREntry from './DPREntry';
-import DPRReport from './DPRReport';
-import PityCashentry from './PityCashentry';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import React from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { View, Text, StyleSheet, Dimensions} from 'react-native';
+import Logout from '../Screens/Logout';
+import Profile from '../Screens/Profile';
+import Dashboard from '../Screens/Dashboard';
+import AttendanceEntry from '../Screens/AttendanceEntry';
+import EditAttendance from '../Screens/EditAttendance';
+import MaterialInward from '../Screens/MaterialInward';
+import MaterialRequest from '../Screens/MaterialRequest';
+import ExpenseReport from '../Screens/ExpenseReport';
+import ExpenseEntry from '../Screens/ExpenseEntry';
+import DPREntry from '../Screens/DPREntry';
+import DPRReport from '../Screens/DPRReport';
+import PityCashentry from '../Screens/PityCashentry';
 
 
+import CustomDrawerContent from '../Components/CustomDrawerContent';
 
 const Drawer = createDrawerNavigator();
 const windowWidth = Dimensions.get('window').width;
 
-function CustomDrawerContent({ navigation }) {
-  const [activeItem, setActiveItem] = useState('');
-  const animatedValue = React.useRef(new Animated.Value(0)).current;
-
-  const handlePress = (item) => {
-    setActiveItem(item);
-    navigation.navigate(item);
-  };
-
-  const handleEditPress = () => {
-    
-    navigation.navigate('Profile');
-  };
-  const handleLogoutPress=(item)=>{
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Login' }],
-    });
-  };
-  const translateX = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 0],
-  });
-
-  const renderDrawerItem = (item, iconName) => {
-    const isActive = activeItem === item;
-
-    return (
-        
-      <TouchableOpacity
-        key={item}
-        style={styles.drawerItem}
-        onPress={() => handlePress(item)}
-        activeOpacity={0.1}
-      >
-        <AntDesign
-          name={iconName}
-          size={24}
-          style={[styles.drawerItemIcon, isActive && styles.drawerItemIconActive]}
-        />
-        <Text style={[styles.drawerItemLabel, isActive && styles.drawerItemLabelActive]}>{item}</Text>
-        {isActive && <ActiveIndicator />}
-      </TouchableOpacity>
-    );
-  }
-
-  return (
-    
-    <DrawerContentScrollView
-    style={styles.drawerContainer} // Apply the custom style with rounded corners
-  >
-      <DrawerHeader navigation={navigation} />
-      <Divider/>
-      {DrawerData.map((item) => renderDrawerItem(item.name, item.iconName))}
-        {/* <View style={styles.drawerBottomRadius} /> */}
-        </DrawerContentScrollView>
-  );
-}
-
 function Main() {
  
-
   return (
     <View style={styles.drawerWrapper}>
       <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />} initialRouteName="Dashboard"
@@ -109,9 +44,7 @@ function Main() {
         <Drawer.Screen name="DPR Entry" component={DPREntry} />
         <Drawer.Screen name="DPR Report" component={DPRReport} />
         <Drawer.Screen name="Expense report" component={ExpenseReport} />
-        <Drawer.Screen name="Pity cash entry" component={PityCashentry} />
-      
-       
+        <Drawer.Screen name="Pity cash entry" component={PityCashentry} />            
       </Drawer.Navigator>
       </View>
   );
