@@ -4,22 +4,42 @@ import RadioButton from '../Components/RadioButton'; // Custom RadioButton compo
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../assets/Colors/Colors';
 
+
+
 const AttendanceForm = () => {
-  // Sample data for the list of users
-  const usersData = [
+  const initialUsersData = [
     { id: 1, name: 'James', attendance: 'Present' },
     { id: 2, name: 'Johnny', attendance: 'Absent' },
     { id: 3, name: 'Robbin', attendance: 'Half Day' },
+    { id: 4, name: 'James', attendance: 'Present' },
+    { id: 5, name: 'Johnny', attendance: 'Absent' },
+    { id: 6, name: 'Robbin', attendance: 'Half Day' },
+    { id: 7, name: 'James', attendance: 'Present' },
+    { id: 8, name: 'Johnny', attendance: 'Absent' },
+    { id: 9, name: 'Robbin', attendance: 'Half Day' },
+    { id: 10, name: 'James', attendance: 'Present' },
+    { id: 11, name: 'Johnny', attendance: 'Absent' },
+    { id: 12, name: 'Robbin', attendance: 'Half Day' },
+    { id: 13, name: 'James', attendance: 'Present' },
+    { id: 14, name: 'Johnny', attendance: 'Absent' },
+    { id: 15, name: 'Robbin', attendance: 'Half Day' },
+    { id: 16, name: 'James', attendance: 'Present' },
+    { id: 17, name: 'Johnny', attendance: 'Absent' },
+    { id: 18, name: 'Robbin', attendance: 'Half Day' },
     // Add more users as needed
   ];
+  const [usersData, setUsersData] = useState(initialUsersData);
+  // Sample data for the list of users
+ 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+
 
   const handleDateChange = (event, selectedDate) => {
     setShowDatePicker(Platform.OS === 'ios'); // Show the date picker on iOS only
     setSelectedDate(selectedDate || selectedDate);
   };
-
+ 
   // Function to handle changes in attendance status
   const handleAttendanceChange = (userId, attendance) => {
     // Handle the logic to update the attendance status for the specific user
@@ -29,33 +49,42 @@ const AttendanceForm = () => {
     );
     setUsersData(updatedUsersData);
   };
+  const formatDate = (date) => {
+    const formattedDate = new Date(date).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+    return formattedDate;
+  };
   const handleSave = () => {
     // Handle the logic to save the attendance data
     // For this example, we will simply log the updated usersData
     console.log('Updated Attendance Data:', usersData);
   };
-
+ 
   // Render each row in the FlatList
   const renderRow = ({ item }) => {
+  
     return (
       <View style={styles.row}>
         <Text style={styles.name}>{item.name}</Text>
         <View style={styles.radioButtonsContainer}>
           <RadioButton
             
-            color="green"
+            color={item.attendance === 'Present' ? 'green' : 'grey'}
             selected={item.attendance === 'Present'}
             onPress={() => handleAttendanceChange(item.id, 'Present')}
           />
           <RadioButton
           
-            color="red"
+          color={item.attendance === 'Absent' ? 'red' : 'grey'}
             selected={item.attendance === 'Absent'}
             onPress={() => handleAttendanceChange(item.id, 'Absent')}
           />
           <RadioButton
            
-            color="grey"
+           color={item.attendance === 'Half Day' ? 'grey' : 'grey'}
             selected={item.attendance === 'Half Day'}
             onPress={() => handleAttendanceChange(item.id, 'Half Day')}
           />
@@ -63,16 +92,21 @@ const AttendanceForm = () => {
         
       </View>
     );
+  
   };
 
   return (
     <View style={styles.container}>
+      
       <View style={styles.bluecontainer}/>
+      
+      <View style={styles.backContainer}>
+      
+     
        {/* Date Picker */}
        <TouchableOpacity style={styles.datePickerContainer} onPress={() => setShowDatePicker(true)}>
         <Text style={styles.datePickerText}>
-          {selectedDate.toDateString()}
-        </Text>
+        {formatDate(selectedDate)}        </Text>
       </TouchableOpacity>
       {showDatePicker && (
         <DateTimePicker
@@ -98,44 +132,68 @@ const AttendanceForm = () => {
       <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
           <Text style={styles.saveButtonText}>Save</Text>
         </TouchableOpacity>
+        </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
+    flex: 1,    
     backgroundColor:'#ccc'
   },
   bluecontainer:{
-    flex:1,
-    backgroundColor:Colors.primary,
-
+backgroundColor:Colors.primary,
+flex:1,
 
   },
-  datePickerContainer: {
+  backContainer:{
+    backgroundColor: '#ccc',
+    position:'absolute',
+    top:'10%',
+    bottom: 0,
     width: '100%',
     paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderRadius:20,
+    
+  },
+  datePickerContainer: {
+    marginTop:10,
+    width: '100%',
+    top:-80,
+    paddingVertical: 10,
     paddingHorizontal: 20,
-    marginBottom: 10,
+   
     borderRadius: 8,
     backgroundColor: '#fff',
   },
   formContainer:{
-    flex:1,
+    flex: 1,
     padding: 20,
-    borderRadius:20,
-    backgroundColor:'#fff'
+    borderRadius: 20,
+    backgroundColor: '#fff',
+    top:-10,
+    marginTop: -20,
+    marginBottom: 5,    
+    borderWidth: 0.5,
+    borderColor: Colors.primary, 
+    shadowColor: Colors.primary, 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.3, 
+    shadowRadius: 3, 
+    elevation: 5,
   },
   header: {
     flexDirection: 'row',
     marginBottom: 30,
-  },
+   },
   columnName: {
     flex: 1,
+    fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: Colors.primary,
   },
   row: {
     flexDirection: 'row',
@@ -144,15 +202,19 @@ const styles = StyleSheet.create({
   },
   name: {
     flex: 1,
-    // backgroundColor:'#ccc',
-    paddingHorizontal:5
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    paddingHorizontal: 5,
+    textTransform: 'capitalize',
   },
   radioButtonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     flex: 2,
  paddingVertical:1,
- paddingHorizontal:0
+ paddingHorizontal:0,
+ marginLeft: -15,
   },
   saveButton: {
     backgroundColor: '#007AFF',
@@ -160,12 +222,33 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginTop: 20,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   saveButtonText: {
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
   },
+
+  datePickerText: {
+    fontSize: 18,
+  fontWeight: 'bold',
+  color: '#333',
+  },
+  entryIcon: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
+ 
+  
 });
 
 export default AttendanceForm;

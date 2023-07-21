@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
-import RadioButtonsGroup from 'react-native-radio-buttons-group';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import RadioGroup from '../Components/RadioGroup';
 
 const IndividualAttendanceEntry = () => {
@@ -25,38 +24,32 @@ const IndividualAttendanceEntry = () => {
   };
 
   return (
-    <View style={{ flex: 1, padding: 16 }}>
-      <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 16 }}>Add New Attendance</Text>
+    <View style={styles.container}>
+      <Text style={styles.heading}>Add New Attendance</Text>
 
       {/* TextInput for Name */}
-      <View style={{ marginBottom: 16 }}>
-        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Name</Text>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Name</Text>
         <TextInput
-          style={{
-            marginBottom: 8,
-            paddingVertical: 8,
-            paddingHorizontal: 12,
-            borderWidth: 1,
-            borderColor: '#ccc',
-            borderRadius: 4,
-          }}
+          style={styles.input}
           value={name}
-          onChangeText={text => setName(text)}
+          onChangeText={(text) => setName(text)}
           placeholder="Enter Name"
         />
       </View>
 
       {/* Date Picker */}
+      
       {/* ... Previous code for date picker ... */}
 
       {/* Radio Buttons Group */}
-     
-      <RadioGroup
-        radioButtons={attendanceOptions}
-        selectedId={attendanceType}
-        onPress={(id) => setAttendanceType(id)}
-        containerStyle={{ marginBottom: 16 }}
-      />
+      <View style={styles.radioGroupContainer}>
+        <RadioGroup
+          radioButtons={attendanceOptions}
+          selectedId={attendanceType}
+          onPress={(id) => setAttendanceType(id)}
+        />
+      </View>
 
       {/* Add Attendance Button */}
       <Button
@@ -67,5 +60,39 @@ const IndividualAttendanceEntry = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#fff',
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  inputContainer: {
+    marginBottom: 16,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  input: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 4,
+  },
+  radioGroupContainer: {
+    marginBottom: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+});
 
 export default IndividualAttendanceEntry;
