@@ -64,9 +64,9 @@ const Dashboard = () => {
           yAxisSuffix=""
           yAxisInterval={1}
           chartConfig={{
-            backgroundColor: "#e26a00",
-            backgroundGradientFrom:'#E12E5C',
-            backgroundGradientTo: "#F9C493",
+            backgroundColor: "#0E5583",
+            backgroundGradientFrom:'#0E5583',
+            backgroundGradientTo: "#0E5583",
             decimalPlaces: 0,
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
