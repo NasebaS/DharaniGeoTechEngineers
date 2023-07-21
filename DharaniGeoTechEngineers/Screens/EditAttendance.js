@@ -115,27 +115,32 @@ navigation.navigate('Attendance entry')
         {AttendanceData.map((data, index) => (
           <View style={styles.itemContainer} key={index}>
             <View style={styles.iconsContainer}>
-              <TouchableOpacity onPress={() => handleEditPress()} activeOpacity={0.1}>
+              <TouchableOpacity onPress={() => handleEditPress()} activeOpacity={0.7}>
                 <AntDesign name="export2" size={15} style={styles.editIcon} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => handleAddPress()} activeOpacity={0.1}>
-                <AntDesign name="pluscircle" size={15} style={styles.addIcon} />
-              </TouchableOpacity>
+              
             </View>
             <View style={styles.dataContainer}>
               <View style={styles.dateContainer}>
                 <Text style={styles.dateText}>Date: {data.date}</Text>
               </View>
               <View style={styles.countsContainer}>
-                <Text>Total: {data.totalEmployees}</Text>
-                <Text>P: {data.presentEmployees}</Text>
-                <Text>A: {data.absentEmployees}</Text>
-                <Text>HD: {data.halfDayEmployees}</Text>
+                <Text style={styles.countText}>Total: {data.totalEmployees}</Text>
+                <Text style={styles.countText}>P: {data.presentEmployees}</Text>
+                <Text style={styles.countText}>A: {data.absentEmployees}</Text>
+                <Text style={styles.countText}>HD: {data.halfDayEmployees}</Text>
               </View>
             </View>
           </View>
         ))}
       </ScrollView>
+      <TouchableOpacity
+        style={styles.floatingButton}
+        onPress={() => handleAddPress()}
+        activeOpacity={0.8}
+      >
+        <AntDesign name="pluscircleo" size={24} color="#fff" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -143,6 +148,8 @@ navigation.navigate('Attendance entry')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    
+    
   },
   bluecontainer: {
     backgroundColor: Colors.primary,
@@ -158,8 +165,9 @@ const styles = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
     alignItems: 'center',
-    paddingTop: '10%',
-    
+    paddingTop: '10%',    
+    top:50,
+    borderRadius:20
   },
   itemContainer: {
     flexDirection: 'row',
@@ -167,12 +175,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 8,
-    borderBottomWidth: 1,
+   elevation:5,
     backgroundColor: '#fff',
     borderRadius: 20,
     marginBottom: 15,
     width: '90%',
-    
+    // borderRadius:20
   },
   iconsContainer: {
     flexDirection: 'row',
@@ -201,6 +209,27 @@ const styles = StyleSheet.create({
   countsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  countText: {
+    fontSize: 14,
+    
+  
+    color: '#666',
+  },
+  floatingButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: Colors.primary,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 5, // Shadow for Android
+    shadowColor: '#000', // Shadow for iOS
+    shadowOpacity: 0.3, // Shadow for iOS
+    shadowOffset: { width: 0, height: 2 }, // Shadow for iOS
   },
 });
 export default EditAttendance;
