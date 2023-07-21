@@ -106,7 +106,7 @@ const AttendanceForm = () => {
        {/* Date Picker */}
        <TouchableOpacity style={styles.datePickerContainer} onPress={() => setShowDatePicker(true)}>
         <Text style={styles.datePickerText}>
-        {formatDate(selectedDate)}        </Text>
+        {formatDate(selectedDate)}</Text>
       </TouchableOpacity>
       {showDatePicker && (
         <DateTimePicker

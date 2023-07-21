@@ -103,3 +103,34 @@ line chart
 
 total expense vs cash in hand
 
+
+
+***********
+container: {
+    flex: 1,
+  },
+  bluecontainer: {
+    backgroundColor: Colors.primary,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: '90%',
+  },
+  contentContainer: {
+    flexGrow: 1,
+    alignItems: 'center',
+    paddingTop: '10%',
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    marginBottom: 15,
+    width: '90%',
+  },
