@@ -1,10 +1,13 @@
-import { StyleSheet, Text, TouchableOpacity, View,ScrollView } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View,ScrollView,Animated} from 'react-native'
+import React,{useState} from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import Colors from '../assets/Colors/Colors';
 const EditAttendance = () => {
+ 
 const navigation=useNavigation()
+
+
   const AttendanceData=[
      
     {
@@ -93,6 +96,53 @@ const navigation=useNavigation()
       "halfDayEmployees": 7
     },
     {
+      "date": "21-07-2023",
+      "totalEmployees": 50,
+      "presentEmployees": 35,
+      "absentEmployees": 8,
+      "halfDayEmployees": 7
+    },
+    {
+      "date": "21-07-2023",
+      "totalEmployees": 50,
+      "presentEmployees": 35,
+      "absentEmployees": 8,
+      "halfDayEmployees": 7
+    },
+    {
+      "date": "21-07-2023",
+      "totalEmployees": 50,
+      "presentEmployees": 35,
+      "absentEmployees": 8,
+      "halfDayEmployees": 7
+    },
+    {
+      "date": "21-07-2023",
+      "totalEmployees": 50,
+      "presentEmployees": 35,
+      "absentEmployees": 8,
+      "halfDayEmployees": 7
+    },
+    {
+      "date": "21-07-2023",
+      "totalEmployees": 50,
+      "presentEmployees": 35,
+      "absentEmployees": 8,
+      "halfDayEmployees": 7
+    }, {
+      "date": "21-07-2023",
+      "totalEmployees": 50,
+      "presentEmployees": 35,
+      "absentEmployees": 8,
+      "halfDayEmployees": 7
+    }, {
+      "date": "21-07-2023",
+      "totalEmployees": 50,
+      "presentEmployees": 35,
+      "absentEmployees": 8,
+      "halfDayEmployees": 7
+    },
+    {
       "date": "2-08-2023",
       "totalEmployees": 50,
       "presentEmployees": 35,
@@ -100,23 +150,33 @@ const navigation=useNavigation()
       "halfDayEmployees": 7
     },
   ]
+  
+  
   const handleEditPress=()=>{
 navigation.navigate('Attendance entry')
   }
    const handleAddPress=()=>{
     navigation.navigate('Attendance entry')
   }
+ 
+ 
   return (
+    
     <View style={styles.container}>
-      
       <View style={styles.bluecontainer} />
-
-      <ScrollView contentContainerStyle={styles.contentContainer}>
+      <View style={styles.backContainer}>
+       <ScrollView contentContainerStyle={styles.scrollContainer}
+      >
+           
+      
         {AttendanceData.map((data, index) => (
-          <View style={styles.itemContainer} key={index}>
+          <Animated.View
+          key={index}
+          style={ styles.itemContainer}
+        >
             <View style={styles.iconsContainer}>
               <TouchableOpacity onPress={() => handleEditPress()} activeOpacity={0.7}>
-                <AntDesign name="export2" size={15} style={styles.editIcon} />
+                <AntDesign name="edit" size={16} style={styles.editIcon} />
               </TouchableOpacity>
               
             </View>
@@ -126,14 +186,16 @@ navigation.navigate('Attendance entry')
               </View>
               <View style={styles.countsContainer}>
                 <Text style={styles.countText}>Total: {data.totalEmployees}</Text>
-                <Text style={styles.countText}>P: {data.presentEmployees}</Text>
-                <Text style={styles.countText}>A: {data.absentEmployees}</Text>
-                <Text style={styles.countText}>HD: {data.halfDayEmployees}</Text>
+                <Text style={[styles.countText, { color: 'green' }]}>P: {data.presentEmployees}</Text>
+                <Text style={[styles.countText, { color: 'red' }]}>A: {data.absentEmployees}</Text>
+                <Text style={[styles.countText, { color: 'grey' }]}>HD: {data.halfDayEmployees}</Text>
               </View>
             </View>
-          </View>
+            </Animated.View>
         ))}
+      
       </ScrollView>
+      </View>
       <TouchableOpacity
         style={styles.floatingButton}
         onPress={() => handleAddPress()}
@@ -142,25 +204,36 @@ navigation.navigate('Attendance entry')
         <AntDesign name="pluscircleo" size={24} color="#fff" />
       </TouchableOpacity>
     </View>
+    
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+    backgroundColor: '#ccc',
     
   },
+  scrollContainer: {
+    flexGrow: 1,
+    alignItems: 'center',
+  },
   bluecontainer: {
-    backgroundColor: Colors.primary,
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    bottom: '90%',
-    borderBottomLeftRadius:20,
-    borderBottomRightRadius:20
+    height: 100, // Adjust the height as needed
+    backgroundColor: Colors.primary,
+    
   
+  },
+  backContainer:{
+    position: 'relative',
+ borderRadius:20,
+ top:10,
+//  backgroundColor:'yellow',
+
   },
   contentContainer: {
     flexGrow: 1,
@@ -191,6 +264,8 @@ const styles = StyleSheet.create({
   editIcon: {
     marginRight: 8,
     color: 'blue',
+    fontSize:20,
+    
   },
   addIcon: {
     color: 'green',
@@ -205,6 +280,7 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: Colors.primary,
   },
   countsContainer: {
     flexDirection: 'row',
@@ -212,7 +288,7 @@ const styles = StyleSheet.create({
   },
   countText: {
     fontSize: 14,
-    
+    fontWeight:'bold',
   
     color: '#666',
   },
