@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList,TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, FlatList,TouchableOpacity, StyleSheet,Platform  } from 'react-native';
 import RadioButton from '../Components/RadioButton'; // Custom RadioButton component
+import DateTimePicker from '@react-native-community/datetimepicker';
+import Colors from '../assets/Colors/Colors';
 
 const AttendanceForm = () => {
   // Sample data for the list of users
@@ -10,6 +12,13 @@ const AttendanceForm = () => {
     { id: 3, name: 'Robbin', attendance: 'Half Day' },
     // Add more users as needed
   ];
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const handleDateChange = (event, selectedDate) => {
+    setShowDatePicker(Platform.OS === 'ios'); // Show the date picker on iOS only
+    setSelectedDate(selectedDate || selectedDate);
+  };
 
   // Function to handle changes in attendance status
   const handleAttendanceChange = (userId, attendance) => {
@@ -58,6 +67,21 @@ const AttendanceForm = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.bluecontainer}/>
+       {/* Date Picker */}
+       <TouchableOpacity style={styles.datePickerContainer} onPress={() => setShowDatePicker(true)}>
+        <Text style={styles.datePickerText}>
+          {selectedDate.toDateString()}
+        </Text>
+      </TouchableOpacity>
+      {showDatePicker && (
+        <DateTimePicker
+          value={selectedDate}
+          mode="date"
+          display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+          onChange={handleDateChange}
+        />
+      )}
       <View style={styles.formContainer}>
       <View style={styles.header}>
         <Text style={styles.columnName}>Name</Text>
@@ -83,6 +107,20 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor:'#ccc'
+  },
+  bluecontainer:{
+    flex:1,
+    backgroundColor:Colors.primary,
+
+
+  },
+  datePickerContainer: {
+    width: '100%',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginBottom: 10,
+    borderRadius: 8,
+    backgroundColor: '#fff',
   },
   formContainer:{
     flex:1,
