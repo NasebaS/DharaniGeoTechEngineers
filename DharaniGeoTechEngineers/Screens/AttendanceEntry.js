@@ -1,71 +1,133 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
-import RadioButtonsGroup from 'react-native-radio-buttons-group';
-import RadioGroup from '../Components/RadioGroup';
+import { View, Text, FlatList,TouchableOpacity, StyleSheet } from 'react-native';
+import RadioButton from '../Components/RadioButton'; // Custom RadioButton component
 
-const AttendanceEntry = () => {
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('');
-  const [attendanceType, setAttendanceType] = useState('');
-
-  const attendanceOptions = [
-    { id: '1', label: 'Present' },
-    { id: '2', label: 'Half Day' },
-    { id: '3', label: 'Absent' },
+const AttendanceForm = () => {
+  // Sample data for the list of users
+  const usersData = [
+    { id: 1, name: 'James', attendance: 'Present' },
+    { id: 2, name: 'Johnny', attendance: 'Absent' },
+    { id: 3, name: 'Robbin', attendance: 'Half Day' },
+    // Add more users as needed
   ];
 
-  const handleAddAttendance = () => {
-    // Perform any validation checks for the name and date fields if required.
-    // Submit the data to your API or perform any other actions.
+  // Function to handle changes in attendance status
+  const handleAttendanceChange = (userId, attendance) => {
+    // Handle the logic to update the attendance status for the specific user
+    // For simplicity, we will just update the state directly in this example.
+    const updatedUsersData = usersData.map((user) =>
+      user.id === userId ? { ...user, attendance } : user
+    );
+    setUsersData(updatedUsersData);
+  };
+  const handleSave = () => {
+    // Handle the logic to save the attendance data
+    // For this example, we will simply log the updated usersData
+    console.log('Updated Attendance Data:', usersData);
+  };
 
-    // Clear the form after successful submission
-    setName('');
-    setDate('');
-    setAttendanceType('');
+  // Render each row in the FlatList
+  const renderRow = ({ item }) => {
+    return (
+      <View style={styles.row}>
+        <Text style={styles.name}>{item.name}</Text>
+        <View style={styles.radioButtonsContainer}>
+          <RadioButton
+            
+            color="green"
+            selected={item.attendance === 'Present'}
+            onPress={() => handleAttendanceChange(item.id, 'Present')}
+          />
+          <RadioButton
+          
+            color="red"
+            selected={item.attendance === 'Absent'}
+            onPress={() => handleAttendanceChange(item.id, 'Absent')}
+          />
+          <RadioButton
+           
+            color="grey"
+            selected={item.attendance === 'Half Day'}
+            onPress={() => handleAttendanceChange(item.id, 'Half Day')}
+          />
+        </View>
+        
+      </View>
+    );
   };
 
   return (
-    <View style={{ flex: 1, padding: 16 }}>
-      <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 16 }}>Add New Attendance</Text>
-
-      {/* TextInput for Name */}
-      <View style={{ marginBottom: 16 }}>
-        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Name</Text>
-        <TextInput
-          style={{
-            marginBottom: 8,
-            paddingVertical: 8,
-            paddingHorizontal: 12,
-            borderWidth: 1,
-            borderColor: '#ccc',
-            borderRadius: 4,
-          }}
-          value={name}
-          onChangeText={text => setName(text)}
-          placeholder="Enter Name"
-        />
+    <View style={styles.container}>
+      <View style={styles.formContainer}>
+      <View style={styles.header}>
+        <Text style={styles.columnName}>Name</Text>
+        <Text style={styles.columnName}>Present</Text>
+        <Text style={styles.columnName}>Absent</Text>
+        <Text style={styles.columnName}>Half Day</Text>
       </View>
-
-      {/* Date Picker */}
-      {/* ... Previous code for date picker ... */}
-
-      {/* Radio Buttons Group */}
-     
-      <RadioGroup
-        radioButtons={attendanceOptions}
-        selectedId={attendanceType}
-        onPress={(id) => setAttendanceType(id)}
-        containerStyle={{ marginBottom: 16 }}
+      <FlatList
+        data={usersData}
+        renderItem={renderRow}
+        keyExtractor={(item) => item.id.toString()}
       />
-
-      {/* Add Attendance Button */}
-      <Button
-        title="Add Attendance"
-        onPress={handleAddAttendance}
-        disabled={!name || !date || !attendanceType}
-      />
+      </View>
+      <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+          <Text style={styles.saveButtonText}>Save</Text>
+        </TouchableOpacity>
     </View>
   );
 };
 
-export default AttendanceEntry;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor:'#ccc'
+  },
+  formContainer:{
+    flex:1,
+    padding: 20,
+    borderRadius:20,
+    backgroundColor:'#fff'
+  },
+  header: {
+    flexDirection: 'row',
+    marginBottom: 30,
+  },
+  columnName: {
+    flex: 1,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  name: {
+    flex: 1,
+    // backgroundColor:'#ccc',
+    paddingHorizontal:5
+  },
+  radioButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    flex: 2,
+ paddingVertical:1,
+ paddingHorizontal:0
+  },
+  saveButton: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 12,
+    borderRadius: 8,
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  saveButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+
+export default AttendanceForm;

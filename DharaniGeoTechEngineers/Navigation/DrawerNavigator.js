@@ -15,6 +15,7 @@ import DPREntry from '../Screens/DPREntry';
 import DPRReport from '../Screens/DPRReport';
 import PityCashentry from '../Screens/PityCashentry';
 import CustomDrawerContent from '../Components/CustomDrawerContent';
+import IndividualAttendanceEntry from '../Screens/IndividualAttendanceEntry';
 
 const Drawer = createDrawerNavigator();
 const windowWidth = Dimensions.get('window').width;
@@ -32,6 +33,7 @@ function Main() {
       }}
       drawerStyle={styles.drawerStyle}
       >
+         <Drawer.Screen name="IndividualAttendanceEntry" component={IndividualAttendanceEntry} />
         <Drawer.Screen name="Logout " component={Logout} />
         <Drawer.Screen name="Profile" component={Profile} />
         <Drawer.Screen name="Dashboard" component={Dashboard} />
