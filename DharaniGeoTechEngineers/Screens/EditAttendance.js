@@ -3,8 +3,9 @@ import React,{useState} from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import Colors from '../assets/Colors/Colors';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 const EditAttendance = () => {
- 
 const navigation=useNavigation()
 
 
@@ -158,7 +159,18 @@ navigation.navigate('Attendance entry')
    const handleAddPress=()=>{
     navigation.navigate('Attendance entry')
   }
- 
+  const getStatusBackgroundColor = (status) => {
+    switch (status) {
+      case 'Present':
+        return '#D0F0C0'; // Light green
+      case 'Absent':
+        return '#F0C0C0'; // Light red
+      case 'Half Day':
+        return '#F0E0C0'; // Light yellow
+      default:
+        return '#fff'; // Default background color for other statuses
+    }
+  };
  
   return (
     
@@ -167,29 +179,46 @@ navigation.navigate('Attendance entry')
       <View style={styles.backContainer}>
        <ScrollView contentContainerStyle={styles.scrollContainer}
       >
-           
+          
       
         {AttendanceData.map((data, index) => (
           <Animated.View
           key={index}
           style={ styles.itemContainer}
         >
-            <View style={styles.iconsContainer}>
+            {/* <View style={styles.iconsContainer}>
               <TouchableOpacity onPress={() => handleEditPress()} activeOpacity={0.7}>
-                <AntDesign name="edit" size={16} style={styles.editIcon} />
+                <AntDesign name="edit" size={24} style={styles.editIcon} />
+              </TouchableOpacity>
+              
+            </View> */}
+            <View style={styles.dataContainer}>
+              <View style={styles.dateContainer}>
+              <FontAwesome name="calendar" size={16} color="blue" style={{ marginRight: 8 }} />
+                <Text style={styles.dateText}>Date: {data.date}</Text>
+              </View>
+              <View style={styles.alignContainer}>
+              <View style={styles.countsContainer}>
+              <View style={[styles.countBackground, { backgroundColor: getStatusBackgroundColor('Total') }]}>
+                <Text style={[styles.countText, { color: 'black' }]}>Total: {data.totalEmployees}</Text>
+              </View>
+              <View style={[styles.countBackground, { backgroundColor: getStatusBackgroundColor('Present') }]}>
+                <Text style={[styles.countText, { color: 'green' }]}>P: {data.presentEmployees}</Text>
+              </View>
+              <View style={[styles.countBackground, { backgroundColor: getStatusBackgroundColor('Absent') }]}>
+                <Text style={[styles.countText, { color: 'red' }]}>A: {data.absentEmployees}</Text>
+              </View>
+              <View style={[styles.countBackground, { backgroundColor: getStatusBackgroundColor('Half Day') }]}>
+                <Text style={[styles.countText, { color: 'orange' }]}>HD: {data.halfDayEmployees}</Text>
+              </View>
+              </View>
+              <View style={styles.iconsContainer}>
+              <TouchableOpacity onPress={() => handleEditPress()} activeOpacity={0.7}>
+                <AntDesign name="edit" size={24} style={styles.editIcon} />
               </TouchableOpacity>
               
             </View>
-            <View style={styles.dataContainer}>
-              <View style={styles.dateContainer}>
-                <Text style={styles.dateText}>Date: {data.date}</Text>
-              </View>
-              <View style={styles.countsContainer}>
-                <Text style={styles.countText}>Total: {data.totalEmployees}</Text>
-                <Text style={[styles.countText, { color: 'green' }]}>P: {data.presentEmployees}</Text>
-                <Text style={[styles.countText, { color: 'red' }]}>A: {data.absentEmployees}</Text>
-                <Text style={[styles.countText, { color: 'grey' }]}>HD: {data.halfDayEmployees}</Text>
-              </View>
+            </View>
             </View>
             </Animated.View>
         ))}
@@ -217,13 +246,14 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     alignItems: 'center',
+    paddingBottom: 80,
   },
   bluecontainer: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    height: 100, // Adjust the height as needed
+    height: 100, 
     backgroundColor: Colors.primary,
     
   
@@ -231,16 +261,32 @@ const styles = StyleSheet.create({
   backContainer:{
     position: 'relative',
  borderRadius:20,
- top:10,
-//  backgroundColor:'yellow',
+ top:50,
 
+
+  },
+ 
+  countBackground: {
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    marginVertical: 2,
+    marginLeft:4
+  },
+  countText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#666',
+    paddingHorizontal:2,
+   
+       
   },
   contentContainer: {
     flexGrow: 1,
     alignItems: 'center',
     paddingTop: '10%',    
     top:50,
-    borderRadius:20
+    borderRadius:8
   },
   itemContainer: {
     flexDirection: 'row',
@@ -248,23 +294,37 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 8,
-   elevation:5,
+    elevation: 5,
     backgroundColor: '#fff',
-    borderRadius: 20,
+    borderRadius: 8,
     marginBottom: 15,
     width: '90%',
-    // borderRadius:20
+      shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
   iconsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
     width: 60,
+    marginBottom:15,
+    
   },
   editIcon: {
-    marginRight: 8,
-    color: 'blue',
+   
+    backgroundColor: Colors.primary,
     fontSize:20,
+    color:"#fff",
+    borderRadius:8,
+    paddingHorizontal:10,
+    paddingVertical:10,
+    fontWeight:"bold",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
     
   },
   addIcon: {
@@ -275,37 +335,44 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
   dateContainer: {
-    marginBottom: 8,
+    marginBottom: 2,
+    right:20,
+    flexDirection:'row',
+
   },
   dateText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: Colors.primary,
+    color: 'blue',
   },
   countsContainer: {
+    paddingTop: -20,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    right:10,
+    
+    
   },
-  countText: {
-    fontSize: 14,
-    fontWeight:'bold',
   
-    color: '#666',
-  },
   floatingButton: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 30,
     right: 20,
-    backgroundColor: Colors.primary,
+    backgroundColor: '#FF0060',
     width: 56,
     height: 56,
     borderRadius: 28,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 5, // Shadow for Android
-    shadowColor: '#000', // Shadow for iOS
-    shadowOpacity: 0.3, // Shadow for iOS
-    shadowOffset: { width: 0, height: 2 }, // Shadow for iOS
+    elevation: 5, 
+    shadowColor: '#000', 
+    shadowOpacity: 0.3, 
+    shadowOffset: { width: 0, height: 2 }, 
+  },
+  alignContainer:{
+flexDirection:'row',
+justifyContent:"space-between",
+alignItems:'center'
   },
 });
 export default EditAttendance;
